@@ -24,7 +24,6 @@ public class Classroom {
 		
 		UserAccount account = new UserAccount(usrName, passwd, pathPhoto, gnder, carrs, bthday, favBrwser);
 		accounts.add(account);
-		System.out.println(accounts);
 	}
 	
 }

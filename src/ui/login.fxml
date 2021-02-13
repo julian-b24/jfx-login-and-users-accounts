@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -38,9 +39,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <JFXButton onAction="#showSignUp" text="Sign Up" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <JFXButton onAction="#logIn" text="Log In" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <JFXPasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

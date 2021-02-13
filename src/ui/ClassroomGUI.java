@@ -19,7 +19,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
-
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import model.Classroom;
 import model.UserAccount;
 
@@ -35,7 +37,7 @@ public class ClassroomGUI {
     private JFXTextField txtUserName;
 
     @FXML
-    private JFXTextField txtPassword;
+    private JFXPasswordField  txtPassword;
     
     //register
     @FXML
@@ -70,6 +72,16 @@ public class ClassroomGUI {
 
     @FXML
     private ChoiceBox<String> txtBrowserChoice;
+    
+    //account list
+    @FXML
+    private TableView<?> tableView;
+
+    @FXML
+    private ImageView imgvPhoto;
+
+    @FXML
+    private Label txtUserNameLabel;
 	
 	public ClassroomGUI(Classroom cr) {
 		classroom = cr;
@@ -251,11 +263,13 @@ public class ClassroomGUI {
     	
     	boolean able = false;
     	
-    	for (UserAccount account : classroom.getAccounts()) {
-    		
-    		if(account.getUserName().equals(userName) && account.getPassword().equals(password)) {
-    			able = true;
-    		}
+    	if(classroom.getAccounts().size() > 0) {
+    		for (UserAccount account : classroom.getAccounts()) {
+        		
+        		if(account.getUserName().equals(userName) && account.getPassword().equals(password)) {
+        			able = true;
+        		}
+        	}
     	}
     	
     	return able;
