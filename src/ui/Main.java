@@ -33,6 +33,7 @@ public class Main extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Classroom App");
 		primaryStage.show();
+		classroomgui.showLogIn(null);
 	}
 	
 
