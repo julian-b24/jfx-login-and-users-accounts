@@ -85,5 +85,9 @@ public class UserAccount {
 		this.favBrowser = favBrowser;
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 }

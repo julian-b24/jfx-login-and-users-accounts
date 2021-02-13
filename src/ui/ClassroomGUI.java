@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +22,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Classroom;
 import model.UserAccount;
@@ -75,13 +80,28 @@ public class ClassroomGUI {
     
     //account list
     @FXML
-    private TableView<?> tableView;
+    private TableView<UserAccount> tableView;
 
     @FXML
     private ImageView imgvPhoto;
 
     @FXML
     private Label txtUserNameLabel;
+    
+    @FXML
+    private TableColumn<UserAccount, String> colUserName;
+
+    @FXML
+    private TableColumn<UserAccount, String> colGender;
+
+    @FXML
+    private TableColumn<UserAccount, String> colCareer;
+
+    @FXML
+    private TableColumn<UserAccount, String> colBirthday;
+
+    @FXML
+    private TableColumn<UserAccount, String> colBrowser;
 	
 	public ClassroomGUI(Classroom cr) {
 		classroom = cr;
@@ -89,18 +109,21 @@ public class ClassroomGUI {
 	
 	//login methods
 	@FXML
-	public void logIn(ActionEvent event) {
+	public void logIn(ActionEvent event) throws IOException {
 		
 		String userName = txtUserName.getText();
 		String password = txtPassword.getText();
 		
 		if(isAbleToLogIn(userName, password)) {
-			//showList();
+			showList(userName);
 		} else {
+			
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Log in incorrect");
 			alert.setHeaderText("An error has occurred!");
 			alert.setContentText("The username and/or the password given are incorrect");
+			
+			alert.showAndWait();
 		}
 
     }
@@ -128,7 +151,7 @@ public class ClassroomGUI {
     	String photoPath = txtFile.getText();
     	String gender = getGender();
     	ArrayList<String> careers = getCarrers();
-    	String date = txtDateSignUp.toString();
+    	String date = txtDateSignUp.getValue().toString();
     	String favBrowser = txtBrowserChoice.getValue().toString();
     	
     	// Warning in case at least one field is equal to "" and the user is not added to the list of users
@@ -274,5 +297,46 @@ public class ClassroomGUI {
     	
     	return able;
     }
+    
+    // account list methods
+    public void showList(String userName) throws IOException {
+    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("account-list.fxml"));
+    	fxmlLoader.setController(this);
+    	Parent listPane = fxmlLoader.load();
+    	
+    	mainPane.getChildren().setAll(listPane);
+    	txtUserNameLabel.setText(userName);
+    	initializeTable();
+    	setImage(userName);
+    }
+    
+    public void initializeTable() {
+    	ObservableList<UserAccount> accounts;
+    	accounts = FXCollections.observableArrayList(classroom.getAccounts());
+    	
+    	colUserName.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("userName"));
+    	colGender.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("gender"));
+    	colCareer.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("carrers"));
+    	colBirthday.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("birthday"));
+    	colBrowser.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("favBrowser"));
+    	
+    	tableView.setItems(accounts);
+    }
+    
+    public void setImage(String userName) {
+    	
+    	int idx = 0;
+    	for (int i = 0; i < classroom.getAccounts().size(); i++) {	
+    		if (classroom.getAccounts().get(i).getUserName().equals(userName)) {
+    			idx = i;
+    		}
+    	}
+    	
+    	String path = classroom.getAccounts().get(idx).getPhoto().toURI().toString();
+    	Image img = new Image(path);
+    	imgvPhoto.setImage(img);
+    }
+    
 
 }
