@@ -21,6 +21,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 
 import model.Classroom;
+import model.UserAccount;
 
 public class ClassroomGUI {
 	
@@ -77,6 +78,18 @@ public class ClassroomGUI {
 	//login methods
 	@FXML
 	public void logIn(ActionEvent event) {
+		
+		String userName = txtUserName.getText();
+		String password = txtPassword.getText();
+		
+		if(isAbleToLogIn(userName, password)) {
+			//showList();
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Log in incorrect");
+			alert.setHeaderText("An error has occurred!");
+			alert.setContentText("The username and/or the password given are incorrect");
+		}
 
     }
 
@@ -232,6 +245,20 @@ public class ClassroomGUI {
     	softwCheck.setSelected(false);
     	telemCheck.setSelected(false);
     	indusCheck.setSelected(false);
+    }
+    
+    public boolean isAbleToLogIn(String userName, String password) {
+    	
+    	boolean able = false;
+    	
+    	for (UserAccount account : classroom.getAccounts()) {
+    		
+    		if(account.getUserName().equals(userName) && account.getPassword().equals(password)) {
+    			able = true;
+    		}
+    	}
+    	
+    	return able;
     }
 
 }
