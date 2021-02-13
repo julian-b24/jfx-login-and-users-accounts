@@ -9,6 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -83,28 +84,31 @@
             <JFXPasswordField fx:id="txtPasswordSignUp" maxWidth="-Infinity" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="329.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <children>
-                  <JFXRadioButton nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="81.0" text="Male">
+                  <JFXRadioButton fx:id="bttnMale" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="81.0" text="Male">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="gender" />
+                     </toggleGroup>
                   </JFXRadioButton>
-                  <JFXRadioButton prefHeight="17.0" prefWidth="94.0" text="Female" />
-                  <JFXRadioButton prefHeight="17.0" prefWidth="97.0" text="Other" />
+                  <JFXRadioButton fx:id="bttnFemale" prefHeight="17.0" prefWidth="94.0" text="Female" toggleGroup="$gender" />
+                  <JFXRadioButton fx:id="bttnOther" prefHeight="17.0" prefWidth="97.0" text="Other" toggleGroup="$gender" />
                </children>
             </HBox>
             <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <children>
-                  <JFXCheckBox prefHeight="29.0" prefWidth="165.0" text="Software Engineering">
+                  <JFXCheckBox fx:id="softwCheck" prefHeight="29.0" prefWidth="165.0" text="Software Engineering">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXCheckBox>
-                  <JFXCheckBox prefHeight="20.0" prefWidth="164.0" text="Telematic Engineering">
+                  <JFXCheckBox fx:id="telemCheck" prefHeight="20.0" prefWidth="164.0" text="Telematic Engineering">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXCheckBox>
-                  <JFXCheckBox prefHeight="20.0" prefWidth="165.0" text="Industrial Engineering">
+                  <JFXCheckBox fx:id="indusCheck" prefHeight="20.0" prefWidth="165.0" text="Industrial Engineering">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -115,7 +119,7 @@
             <ChoiceBox fx:id="txtBrowserChoice" prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <JFXButton layoutX="489.0" layoutY="146.0" prefHeight="25.0" prefWidth="84.0" text="Browse">
+      <JFXButton layoutX="489.0" layoutY="146.0" onAction="#browseFile" prefHeight="25.0" prefWidth="84.0" text="Browse">
          <font>
             <Font size="17.0" />
          </font>

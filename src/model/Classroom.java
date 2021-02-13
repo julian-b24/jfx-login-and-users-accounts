@@ -18,4 +18,13 @@ public class Classroom {
 		this.accounts = accounts;
 	}
 	
+	public void addAccount( String usrName, String passwd, String pathPhoto, 
+							String gnder, ArrayList<String> carrs, String bthday,
+							String favBrwser) {
+		
+		UserAccount account = new UserAccount(usrName, passwd, pathPhoto, gnder, carrs, bthday, favBrwser);
+		accounts.add(account);
+		System.out.println(accounts);
+	}
+	
 }
