@@ -1,19 +1,24 @@
 package ui;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
+
 import model.Classroom;
 
 public class ClassroomGUI {
 	
 	private Classroom classroom;
-	
+		
 	@FXML
     private Pane mainPane;
 	
@@ -51,8 +56,13 @@ public class ClassroomGUI {
     }
 
     @FXML
-	public void showSignUp(ActionEvent event) {
+	public void showSignUp(ActionEvent event) throws IOException {
 	
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
+    	fxmlLoader.setController(this);
+    	Parent registerPane = fxmlLoader.load();
+    	
+    	mainPane.getChildren().setAll(registerPane);
     }
     
     //register methods
@@ -62,8 +72,13 @@ public class ClassroomGUI {
     }
 
     @FXML
-    public void showLogIn(ActionEvent event) {
-
+    public void showLogIn(ActionEvent event) throws IOException {
+    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+    	fxmlLoader.setController(this);
+    	Parent logInPane = fxmlLoader.load();
+    	
+    	mainPane.getChildren().setAll(logInPane);
     }
 
 }
